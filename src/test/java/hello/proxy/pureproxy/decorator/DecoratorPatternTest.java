@@ -2,6 +2,7 @@ package hello.proxy.pureproxy.decorator;
 
 import hello.proxy.pureproxy.decorator.code.Component;
 import hello.proxy.pureproxy.decorator.code.DecoratorPatternClient;
+import hello.proxy.pureproxy.decorator.code.MessageDecorator;
 import hello.proxy.pureproxy.decorator.code.RealComponent;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,18 @@ public class DecoratorPatternTest {
     void noDecorator() {
         Component realComponent = new RealComponent();
         DecoratorPatternClient client = new DecoratorPatternClient(realComponent);
+
+        client.execute();
+    }
+
+    /**
+     * 데코레이터 패턴 적용 후, 부가 기능 추가 - 꾸미기
+     */
+    @Test
+    void decorator2() {
+        Component realComponent = new RealComponent();
+        Component messageDecorator = new MessageDecorator(realComponent);
+        DecoratorPatternClient client = new DecoratorPatternClient(messageDecorator);
 
         client.execute();
     }
